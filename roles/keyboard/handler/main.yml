@@ -1,0 +1,4 @@
+---
+- name: Reload X11 keyboard configuration
+  ansible.builtin.command: setxkbmap custom
+  become: yes
