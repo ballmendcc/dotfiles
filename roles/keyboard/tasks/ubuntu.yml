@@ -25,12 +25,14 @@
     target: install
 
 - name: "Keyboard | Deploy keyd configuration"
+  become: true
   copy:
     src: "keyd.conf"
     dest: "/etc/keyd/default.conf"
     mode: "0644"
 
 - name: "Keyboard | Enable and start keyd service"
+  become: true
   systemd:
     name: keyd
     enabled: true
