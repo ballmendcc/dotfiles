@@ -14,10 +14,12 @@
     version: "master"
 
 - name: "Keyboard | Build keyd"
+  become: true
   make:
     chdir: "/tmp/keyd"
 
 - name: "Keyboard | Install keyd"
+  become: true
   make:
     chdir: "/tmp/keyd"
     target: install
