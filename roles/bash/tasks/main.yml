@@ -1,73 +1,80 @@
 ---
-- name: "Bash | Detect oh-my-bash"
+- name: "ZSH | Install zsh"
+  ansible.builtin.apt:
+    name: zsh
+    state: present
+    update_cache: true
+  become: true
+
+- name: "Bash | Detect oh-my-zsh"
   ansible.builtin.stat:
-    path: "{{ ansible_user_dir }}/.oh-my-bash"
-  register: ohmybash
+    path: "{{ ansible_user_dir }}/.oh-my-zsh"
+  register: ohmyzsh
 
-- name: "Bash | Register oh-my-bash state"
+- name: "Bash | Register oh-my-zsh state"
   ansible.builtin.set_fact:
-    ohmybash_is_installed: "{{ ohmybash.stat.exists }}"
+    ohmyzsh_is_installed: "{{ ohmyzsh.stat.exists }}"
 
-- name: "Bash | Debug ohmybash_is_installed"
+- name: "Bash | Debug ohmyzsh_is_installed"
   ansible.builtin.debug:
-    var: ohmybash_is_installed
+    var: ohmyzsh_is_installed
 
-- name: "Bash | Install oh-my-bash"
-  when: not ohmybash_is_installed
+- name: "Bash | Install oh-my-zsh"
+  when: not ohmyzsh_is_installed
   block:
-    - name: "Bash | Download oh-my-bash Install Script"
+    - name: "Bash | Download oh-my-zsh Install Script"
       ansible.builtin.get_url:
-        url: https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh
-        dest: /{{ ansible_user_dir }}/oh-my-bash.install.sh
+        url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+        dest: /{{ ansible_user_dir }}/oh-my-zsh.install.sh
         force: true
         mode: "0755"
       notify:
-        - "Bash | Cleanup oh-my-bash install script"
+        - "Bash | Cleanup oh-my-zsh install script"
 
     - name: "Bash | Run the install script"
       ansible.builtin.script:
-        cmd: /{{ ansible_user_dir }}/oh-my-bash.install.sh
+        cmd: /{{ ansible_user_dir }}/oh-my-zsh.install.sh
 
-- name: "Bash | Copy .bashrc"
+- name: "Bash | Copy .zshrc"
   ansible.builtin.copy:
-    src: ".bashrc"
-    dest: "{{ ansible_user_dir }}/.bashrc"
+    src: ".zshrc"
+    dest: "{{ ansible_user_dir }}/.zshrc"
     mode: "0644"
 
-- name: "Bash | Copy .profile"
+- name: "Bash | Copy .zprofile"
   ansible.builtin.copy:
-    src: ".profile"
-    dest: "{{ ansible_user_dir }}/.profile"
+    src: ".zprofile"
+    dest: "{{ ansible_user_dir }}/.zprofile"
     mode: "0644"
 
-- name: "Bash | Copy custom bash config"
+- name: "Bash | Copy custom zsh config"
   ansible.builtin.copy:
     dest: "{{ ansible_user_dir }}/.config/"
-    src: "bash"
+    src: "zsh"
     mode: "0644"
     directory_mode: "0755"
     force: true
 
-- name: "Bash | Copy custom bash theme"
-  ansible.builtin.copy:
-    dest: "{{ ansible_user_dir }}/.oh-my-bash/custom/"
-    src: "themes"
-    directory_mode: "0755"
-    mode: "0644"
-    force: true
+# - name: "Bash | Copy custom bash theme"
+#   ansible.builtin.copy:
+#     dest: "{{ ansible_user_dir }}/.oh-my-bash/custom/"
+#     src: "themes"
+#     directory_mode: "0755"
+#     mode: "0644"
+#     force: true
 
 - name: "Bash | Set default terminal"
   ansible.builtin.user:
     name: "{{ host_user }}"
-    shell: /usr/bin/bash
+    shell: /usr/bin/zsh
   become: true
 
-- name: "Bash | Set private variables"
-  ansible.builtin.template:
-    dest: "{{ ansible_user_dir }}/.config/bash/.bash_private"
-    src: ".bash_private.j2"
-    mode: "0644"
-  no_log: true
+# - name: "Bash | Set private variables"
+#   ansible.builtin.template:
+#     dest: "{{ ansible_user_dir }}/.config/bash/.bash_private"
+#     src: ".bash_private.j2"
+#     mode: "0644"
+#   no_log: true
 
 # - name: "Bash | Copy Private Files"
 #   ansible.builtin.lineinfile:
@@ -80,24 +87,24 @@
 - name: "Bash | {{ ansible_distribution }} | Identify distribution config"
   ansible.builtin.stat:
     path: "{{ role_path }}/files/os/{{ ansible_distribution }}"
-  register: bash_os_distribution_config
+  register: zsh_os_distribution_config
 
 - name: "Bash | {{ ansible_os_family }} | Identify os family config"
   ansible.builtin.stat:
     path: "{{ role_path }}/files/os/{{ ansible_os_family }}"
-  register: bash_os_family_config
-  when: not bash_os_distribution_config.stat.exists
+  register: zsh_os_family_config
+  when: not zsh_os_distribution_config.stat.exists
 
 - name: "Bash | Calculate os config src"
   ansible.builtin.set_fact:
-    bash_os_config: "{{ bash_os_distribution_config if bash_os_distribution_config.stat.exists else bash_os_family_config }}"
+    zsh_os_config: "{{ zsh_os_distribution_config if zsh_os_distribution_config.stat.exists else bash_os_family_config }}"
 
-- name: "Bash | Copy custom bash config for os: {{ bash_os_config.stat.path | basename }}"
+- name: "Bash | Copy custom zsh config for os: {{ zsh_os_config.stat.path | basename }}"
   ansible.builtin.copy:
-    dest: "{{ ansible_user_dir }}/.config/bash/"
-    src: "{{ bash_os_config.stat.path }}/"
+    dest: "{{ ansible_user_dir }}/.config/zsh/"
+    src: "{{ zsh_os_config.stat.path }}/"
     mode: "0644"
     force: true
   when:
-    - bash_os_config is defined
-    - bash_os_config.stat.exists
+    - zsh_os_config is defined
+    - zsh_os_config.stat.exists
