@@ -103,6 +103,11 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
+
+for file in $HOME/.config/zsh/*.sh; do
+  source "$file"
+done
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
