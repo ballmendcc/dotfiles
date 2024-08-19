@@ -200,6 +200,13 @@ This shell script is also used to initialize your environment after installing `
 
 > NOTE: You must follow required steps before running this command or things may become unusable until fixed.
 
+
+```bash
+mkdir $HOME/.ansible-vault/
+nano $HOME/.ansible-vault/vault.secret
+```
+
+
 ```bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/ballmendcc/dotfiles/main/bin/dotfiles)"
 ```
