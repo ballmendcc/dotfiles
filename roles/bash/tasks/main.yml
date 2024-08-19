@@ -69,13 +69,13 @@
     mode: "0644"
   no_log: true
 
-- name: "Bash | Copy Private Files"
-  ansible.builtin.lineinfile:
-    name: "~/.openai.apikey"
-    line: "{{ bash_private.OPENAI_KEY }}"
-    create: true
-    mode: "0600"
-    state: present
+# - name: "Bash | Copy Private Files"
+#   ansible.builtin.lineinfile:
+#     name: "~/.openai.apikey"
+#     line: "{{ bash_private.OPENAI_KEY }}"
+#     create: true
+#     mode: "0600"
+#     state: present
 
 - name: "Bash | {{ ansible_distribution }} | Identify distribution config"
   ansible.builtin.stat:
