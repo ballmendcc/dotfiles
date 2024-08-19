@@ -1,5 +1,5 @@
 default_roles:
-  - system
+  # - system
   # - 1password
   - alacritty
   # - asciiquarium
@@ -7,9 +7,9 @@ default_roles:
   # - bat
   # - btop
   - docker
-  - flatpak
-  - fonts
-  - fzf
+  # - flatpak
+  # - fonts
+  # - fzf
   - git
   - go
   # - helm
@@ -36,7 +36,7 @@ default_roles:
   # - tmate
   - tmux
   # - zellij
-  # - spotify
+  - spotify
   # - zoxide
 
 git_user_name: "ballmend"
