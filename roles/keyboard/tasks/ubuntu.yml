@@ -1,5 +1,5 @@
 ---
-- name: "Ensure required packages are installed"
+- name: "Keyboard | Ensure required packages are installed"
   apt:
     name:
       - git
@@ -7,34 +7,34 @@
     state: present
   become: true
 
-- name: "Clone the keyd repository"
+- name: "Keyboard | Clone the keyd repository"
   git:
     repo: "https://github.com/rvaiya/keyd"
     dest: "/tmp/keyd"
     version: "master"
 
-- name: "Build keyd"
+- name: "Keyboard | Build keyd"
   make:
     chdir: "/tmp/keyd"
 
-- name: "Install keyd"
+- name: "Keyboard | Install keyd"
   make:
     chdir: "/tmp/keyd"
     target: install
 
-- name: "Deploy keyd configuration"
+- name: "Keyboard | Deploy keyd configuration"
   copy:
     src: "keyd.conf"
     dest: "/etc/keyd/default.conf"
     mode: "0644"
 
-- name: "Enable and start keyd service"
+- name: "Keyboard | Enable and start keyd service"
   systemd:
     name: keyd
     enabled: true
     state: started
 
-- name: Copy custom keyboard layout
+- name: Keyboard | Copy custom keyboard layout
   ansible.builtin.copy:
     src: custom
     dest: /usr/share/X11/xkb/symbols/custom
@@ -44,7 +44,7 @@
   notify: Reload X11 keyboard configuration
   become: yes
 
-- name: Configure the custom layout as the default
+- name: Keyboard | Configure the custom layout as the default
   ansible.builtin.template:
     src: keyboard.conf.j2
     dest: /etc/X11/xorg.conf.d/00-keyboard.conf
@@ -54,7 +54,7 @@
   notify: Reload X11 keyboard configuration
   become: yes
 
-- name: Set the custom layout system-wide (for init systems)
+- name: Keyboard | Set the custom layout system-wide (for init systems)
   ansible.builtin.lineinfile:
     path: /etc/default/keyboard
     regexp: '^XKBLAYOUT='
