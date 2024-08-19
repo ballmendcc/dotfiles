@@ -38,6 +38,7 @@ default_roles:
   # - zellij
   - spotify
   # - zoxide
+  - keyboard
 
 git_user_name: "ballmend"
 git_user_email: ballmend76@gmail.com
