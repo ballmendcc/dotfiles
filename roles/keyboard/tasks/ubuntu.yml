@@ -5,6 +5,7 @@
       - git
       - build-essential
     state: present
+  become: true
 
 - name: "Clone the keyd repository"
   git:
