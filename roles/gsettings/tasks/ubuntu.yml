@@ -96,3 +96,29 @@
     key: /org/gnome/desktop/interface/enable-animations
     value: "false"
 
+- name: gsettings | Install Vanilla GNOME session
+  apt:
+    name: gnome-session
+    state: present
+  become: true
+
+- name: gsettings | Create or update .dmrc file for the current user
+  template:
+    src: dmrc.j2
+    dest: "{{ ansible_user_dir }}/.dmrc"
+    owner: "{{ ansible_user }}"
+    mode: '0644'
+
+- name: gsettings | Optionally set default GNOME session for all users (GDM)
+  lineinfile:
+    path: /etc/gdm3/custom.conf
+    regexp: '^#?DefaultSession='
+    line: 'DefaultSession=gnome.desktop'
+    state: present
+  become: true
+
+- name: gsettings | Install GNOME tweaks
+  apt:
+    name: gnome-tweaks
+    state: present
+  become: true

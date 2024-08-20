@@ -1,48 +1,58 @@
-# ---
-# - name: "Install Alacritty"
-#   ansible.builtin.apt:
-#     name: alacritty
+---
+# - name: applications | Install required applications
+#   apt:
+#     name:
+#       - alacritty
+#       - dconf-cli
+#       - dbus-x11
+#       - gnome-shell
 #     state: present
+#     update_cache: yes
 #   become: true
+- name: "Install Alacritty"
+  ansible.builtin.apt:
+    name: alacritty
+    state: present
+  become: true
 
-# - name: "Download MesloLGS NF Regular.ttf"
-#   get_url:
-#     url: "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf"
-#     dest: "/tmp/MesloLGS NF Regular.ttf"
+- name: "Download MesloLGS NF Regular.ttf"
+  get_url:
+    url: "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf"
+    dest: "/tmp/MesloLGS NF Regular.ttf"
 
-# - name: "Download MesloLGS NF Bold.ttf"
-#   get_url:
-#     url: "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf"
-#     dest: "/tmp/MesloLGS NF Bold.ttf"
+- name: "Download MesloLGS NF Bold.ttf"
+  get_url:
+    url: "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf"
+    dest: "/tmp/MesloLGS NF Bold.ttf"
 
-# - name: "Download MesloLGS NF Italic.ttf"
-#   get_url:
-#     url: "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf"
-#     dest: "/tmp/MesloLGS NF Italic.ttf"
+- name: "Download MesloLGS NF Italic.ttf"
+  get_url:
+    url: "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf"
+    dest: "/tmp/MesloLGS NF Italic.ttf"
 
-# - name: "Download MesloLGS NF Bold Italic.ttf"
-#   get_url:
-#     url: "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf"
-#     dest: "/tmp/MesloLGS NF Bold Italic.ttf"
+- name: "Download MesloLGS NF Bold Italic.ttf"
+  get_url:
+    url: "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf"
+    dest: "/tmp/MesloLGS NF Bold Italic.ttf"
 
-# - name: "Create fonts directory if it doesn't exist"
-#   file:
-#     path: "~/.local/share/fonts"
-#     state: directory
-#     mode: '0755'
+- name: "Create fonts directory if it doesn't exist"
+  file:
+    path: "~/.local/share/fonts"
+    state: directory
+    mode: '0755'
 
-# - name: "Move fonts to the local fonts directory"
-#   command: mv /tmp/MesloLGS\ NF\ *.ttf ~/.local/share/fonts/
-#   become: false
+- name: "Move fonts to the local fonts directory"
+  command: mv /tmp/MesloLGS\ NF\ *.ttf ~/.local/share/fonts/
+  become: false
 
-# - name: "Update font cache"
-#   command: fc-cache -f -v
-#   become: false
+- name: "Update font cache"
+  command: fc-cache -f -v
+  become: false
 
-# - name: "Set MesloLGS NF as the font for Alacritty"
-#   copy:
-#     dest: "~/.config/alacritty/alacritty.yml"
-#     content: |
-#       [font.normal]
-#       family = "MesloLGS NF"
-#   become: false
+- name: "Set MesloLGS NF as the font for Alacritty"
+  copy:
+    dest: "~/.config/alacritty/alacritty.yml"
+    content: |
+      [font.normal]
+      family = "MesloLGS NF"
+  become: false
