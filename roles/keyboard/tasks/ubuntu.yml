@@ -48,21 +48,34 @@
   notify: Reload X11 keyboard configuration
   become: yes
 
-- name: Keyboard | Configure the custom layout as the default
-  ansible.builtin.template:
-    src: keyboard.conf.j2
-    dest: /etc/X11/xorg.conf.d/00-keyboard.conf
-    owner: root
-    group: root
-    mode: '0644'
-  notify: Reload X11 keyboard configuration
-  become: yes
+- name: Set custom keyboard layout as default
+  community.general.dconf:
+    key: /org/gnome/desktop/input-sources/sources
+    value: "[('xkb', 'custom')]"
 
-- name: Keyboard | Set the custom layout system-wide (for init systems)
-  ansible.builtin.lineinfile:
-    path: /etc/default/keyboard
-    regexp: '^XKBLAYOUT='
-    line: 'XKBLAYOUT="custom"'
-    create: yes
-  notify: Reload X11 keyboard configuration
-  become: yes
+# - name: Reload keyd configuration
+#   ansible.builtin.command:
+#     cmd: "keyd reload"
+
+# - name: Set custom layout with setxkbmap
+#   ansible.builtin.command:
+#     cmd: "setxkbmap custom"
+
+# - name: Keyboard | Configure the custom layout as the default
+#   ansible.builtin.template:
+#     src: keyboard.conf.j2
+#     dest: /etc/X11/xorg.conf.d/00-keyboard.conf
+#     owner: root
+#     group: root
+#     mode: '0644'
+#   notify: Reload X11 keyboard configuration
+#   become: yes
+
+# - name: Keyboard | Set the custom layout system-wide (for init systems)
+#   ansible.builtin.lineinfile:
+#     path: /etc/default/keyboard
+#     regexp: '^XKBLAYOUT='
+#     line: 'XKBLAYOUT="custom"'
+#     create: yes
+#   notify: Reload X11 keyboard configuration
+#   become: yes
