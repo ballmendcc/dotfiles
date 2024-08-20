@@ -48,7 +48,13 @@
   notify: Reload X11 keyboard configuration
   become: yes
 
-- name: Set custom keyboard layout as default
+- name: Read currently available keyboard layouts in Gnome
+  community.general.dconf:
+    key: "/org/gnome/desktop/input-sources/sources"
+    state: read
+  register: keyboard_layouts
+
+- name: Keyboard | Set custom keyboard layout as default
   become: yes
   community.general.dconf:
     key: /org/gnome/desktop/input-sources/sources
