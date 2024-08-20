@@ -73,6 +73,7 @@
       - "python3-psutil installed: {{ not psutil_check.changed }}"
 
 - name: Read currently available keyboard layouts in Gnome
+  become: yes
   community.general.dconf:
     key: "/org/gnome/desktop/input-sources/sources"
     state: read
