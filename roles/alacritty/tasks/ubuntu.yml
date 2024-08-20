@@ -55,7 +55,7 @@
 
 - name: "Ensure the Alacritty configuration directory exists"
   file:
-    path: ~/.config/alacritty
+    path: "{{ ansible_user_dir }}/.config/alacritty"
     state: directory
     mode: '0755'
 
@@ -63,5 +63,5 @@
   become: yes
   copy:
     src: alacritty.toml
-    dest: ~/.config/alacritty/alacritty.toml
+    dest: "{{ ansible_user_dir }}/.config/alacritty/alacritty.toml"
     mode: '0644'
