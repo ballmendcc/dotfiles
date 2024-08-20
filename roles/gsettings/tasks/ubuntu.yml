@@ -12,6 +12,12 @@
 
 - name: Set up 12 GNOME workspaces
   dconf:
+    key: "/org/gnome/mutter/dynamic-workspaces"
+    value: "false"
+    state: present
+
+- name: Set up 12 GNOME workspaces
+  dconf:
     key: "/org/gnome/desktop/wm/preferences/num-workspaces"
     value: "12"
     state: present
