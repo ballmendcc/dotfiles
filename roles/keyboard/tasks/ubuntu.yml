@@ -48,6 +48,19 @@
   notify: Reload X11 keyboard configuration
   become: yes
 
+- name: Install required packages for dconf
+  apt:
+    name:
+      - python3-psutil
+      - dconf-cli
+      # - dbus-x11
+      - dbus-send
+      - dbus-run-session
+      - gnome-shell
+    state: present
+    update_cache: yes
+  become: true
+
 - name: Check if GNOME is installed
   command: gnome-shell --version
   register: gnome_version
