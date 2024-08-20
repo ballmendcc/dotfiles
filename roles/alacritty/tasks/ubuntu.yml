@@ -65,4 +65,3 @@
     src: alacritty.toml
     dest: ~/.config/alacritty/alacritty.toml
     mode: '0644'
-    owner: "{{ ansible_user }}"
