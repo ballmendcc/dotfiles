@@ -49,6 +49,7 @@
   become: yes
 
 - name: Set custom keyboard layout as default
+  become: yes
   community.general.dconf:
     key: /org/gnome/desktop/input-sources/sources
     value: "[('xkb', 'custom')]"
