@@ -10,6 +10,12 @@
     update_cache: yes
   become: true
 
+- name: Set up 12 GNOME workspaces
+  dconf:
+    key: "/org/gnome/desktop/wm/preferences/num-workspaces"
+    value: "12"
+    state: present
+
 - name: Set up custom keybindings for desktops 1-12
   community.general.dconf:
     key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings
