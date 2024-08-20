@@ -42,7 +42,7 @@
     mode: '0755'
 
 - name: "Move fonts to the local fonts directory"
-  shell: mv /tmp/MesloLGS\ NF\ *.ttf ~/.local/share/fonts/
+  shell: "mv /tmp/MesloLGS\ NF\ *.ttf ~/.local/share/fonts/"
   become: true
 
 - name: "Update font cache"
