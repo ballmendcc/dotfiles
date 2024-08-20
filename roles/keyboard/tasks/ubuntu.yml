@@ -53,6 +53,7 @@
   community.general.dconf:
     key: /org/gnome/desktop/input-sources/sources
     value: "[('xkb', 'custom')]"
+    state: present
 
 # - name: Reload keyd configuration
 #   ansible.builtin.command:
