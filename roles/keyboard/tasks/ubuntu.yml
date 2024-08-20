@@ -48,6 +48,30 @@
   notify: Reload X11 keyboard configuration
   become: yes
 
+- name: Check if GNOME is installed
+  command: gnome-shell --version
+  register: gnome_version
+  ignore_errors: yes
+
+- name: Check for dconf
+  command: which dconf
+  register: dconf_path
+  ignore_errors: yes
+
+- name: Check for python3-psutil
+  package:
+    name: python3-psutil
+    state: present
+  check_mode: yes
+  register: psutil_check
+
+- name: Display results
+  debug:
+    msg: 
+      - "GNOME installed: {{ gnome_version.rc == 0 }}"
+      - "dconf available: {{ dconf_path.rc == 0 }}"
+      - "python3-psutil installed: {{ not psutil_check.changed }}"
+
 - name: Read currently available keyboard layouts in Gnome
   community.general.dconf:
     key: "/org/gnome/desktop/input-sources/sources"
