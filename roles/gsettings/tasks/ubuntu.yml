@@ -1,5 +1,5 @@
 ---
-- name: Install required packages for dconf
+- name: gsettings | Install required packages for dconf
   apt:
     name:
       - python3-psutil
@@ -10,19 +10,19 @@
     update_cache: yes
   become: true
 
-- name: Set up 12 GNOME workspaces
+- name: gsettings | Turn off dynamic workspaces
   dconf:
     key: "/org/gnome/mutter/dynamic-workspaces"
     value: "false"
     state: present
 
-- name: Set up 12 GNOME workspaces
+- name: gsettings | Set up 12 GNOME workspaces
   dconf:
     key: "/org/gnome/desktop/wm/preferences/num-workspaces"
     value: "12"
     state: present
 
-- name: Set up custom keybindings for desktops 1-12
+- name: gsettings | Set up custom keybindings for desktops 1-12
   community.general.dconf:
     key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings
     value: "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/',\
@@ -38,7 +38,7 @@
              '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom10/',\
              '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom11/']"
 
-- name: Set keybindings for desktops 1-12
+- name: gsettings | Set keybindings for desktops 1-12
   community.general.dconf:
     key: "{{ item.key }}"
     value: "{{ item.value }}"
@@ -91,7 +91,7 @@
     - { key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom11/command', value: "'wmctrl -s 11'" }
     - { key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom11/binding', value: "'<Ctrl><Alt><Super><Shift>F12'" }
 
-- name: Disable GNOME animations
+- name: gsettings | Disable GNOME animations
   community.general.dconf:
     key: /org/gnome/desktop/interface/enable-animations
     value: "false"
