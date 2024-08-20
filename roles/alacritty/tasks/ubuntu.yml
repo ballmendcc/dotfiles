@@ -45,10 +45,23 @@
   command: fc-cache -f -v
   become: false
 
-- name: "Set MesloLGS NF as the font for Alacritty"
+# - name: "Set MesloLGS NF as the font for Alacritty"
+#   copy:
+#     dest: "~/.config/alacritty/alacritty.toml"
+#     content: |
+#       [font.normal]
+#       family = "MesloLGS NF"
+#   become: false
+
+- name: "Ensure the Alacritty configuration directory exists"
+  file:
+    path: ~/.config/alacritty
+    state: directory
+    mode: '0755'
+
+- name: "Copy Alacritty configuration file"
   copy:
-    dest: "~/.config/alacritty/alacritty.yml"
-    content: |
-      [font.normal]
-      family = "MesloLGS NF"
-  become: false
+    src: alacritty.toml
+    dest: ~/.config/alacritty/alacritty.toml
+    mode: '0644'
+    owner: "{{ ansible_user }}"
