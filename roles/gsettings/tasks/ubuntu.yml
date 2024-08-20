@@ -1,4 +1,17 @@
 ---
+- name: Install required packages for dconf
+  apt:
+    name:
+      - python3-psutil
+      - dconf-cli
+      - dbus-x11
+      - dbus-send
+      - dbus-run-session
+      - gnome-shell
+    state: present
+    update_cache: yes
+  become: true
+
 - name: Set up custom keybindings for desktops 1-12
   community.general.dconf:
     key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings
