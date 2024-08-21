@@ -56,6 +56,7 @@
   changed_when: gpg_key.stdout != ''
 
 - name: Install Microsoft GPG key
+  become: yes
   copy:
     content: "{{ lookup('file', '/tmp/microsoft.gpg') }}"
     dest: /etc/apt/keyrings/packages.microsoft.gpg
