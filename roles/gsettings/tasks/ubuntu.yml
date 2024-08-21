@@ -102,6 +102,7 @@
   become: true
 
 - name: gsettings | Create or update .dmrc file for the current user
+  become: true
   template:
     src: dmrc.j2
     dest: "{{ ansible_user_dir }}/.dmrc"
