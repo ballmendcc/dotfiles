@@ -108,6 +108,13 @@
     dest: "/etc/gdm3/custom.conf"
     mode: '0644'
 
+- name: gsettings | Copy custom user session configuration file for the current user
+  become: true
+  copy:
+    src: ballmend
+    dest: "/var/lib/AccountsService/users/ballmend"
+    mode: '0644'
+
 - name: gsettings | Install GNOME tweaks
   apt:
     name: gnome-tweaks
