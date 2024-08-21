@@ -1,0 +1,5 @@
+---
+- name: Remove temporary key file
+  file:
+    path: /tmp/microsoft.gpg
+    state: absent

@@ -1,0 +1,118 @@
+---
+- name: Ensure curl wget gpg and gnupg are installed
+  apt:
+    name:
+      - curl
+      - gnupg
+      - wget
+      - gpg
+    state: present
+    update_cache: yes
+
+- name: Download Spotify GPG key
+  get_url:
+    url: https://download.spotify.com/debian/pubkey_6224F9941A8AA6D1.gpg
+    dest: /tmp/spotify.gpg
+
+- name: Add Spotify GPG key
+  command: gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg /tmp/spotify.gpg
+  register: gpg_key
+  changed_when: gpg_key.rc == 0
+
+- name: Add Spotify repository
+  apt_repository:
+    repo: 'deb http://repository.spotify.com stable non-free'
+    filename: spotify
+    state: present
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+
+- name: Install Spotify
+  apt:
+    name: spotify-client
+    state: present
+
+- name: Remove temporary GPG key file
+  file:
+    path: /tmp/spotify.gpg
+    state: absent
+
+- name: Download Microsoft GPG key
+  get_url:
+    url: https://packages.microsoft.com/keys/microsoft.asc
+    dest: /tmp/microsoft.asc
+
+- name: Add Microsoft GPG key
+  command: gpg --dearmor /tmp/microsoft.asc
+  register: gpg_key
+  changed_when: gpg_key.stdout != ''
+
+- name: Install Microsoft GPG key
+  copy:
+    content: "{{ lookup('file', '/tmp/microsoft.gpg') }}"
+    dest: /etc/apt/keyrings/packages.microsoft.gpg
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Remove temporary key file
+
+- name: Add VSCode repository
+  apt_repository:
+    repo: 'deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main'
+    filename: vscode
+    state: present
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+
+- name: Install Visual Studio Code
+  apt:
+    name: code
+    state: present
+
+- name: Remove temporary GPG key file
+  file:
+    path: /tmp/microsoft.asc
+    state: absent
+
+- name: Add Brave GPG key
+  get_url:
+    url: https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+    dest: /tmp/brave-browser-archive-keyring.gpg
+
+- name: Install Brave GPG key
+  copy:
+    src: /tmp/brave-browser-archive-keyring.gpg
+    dest: /usr/share/keyrings/brave-browser-archive-keyring.gpg
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Add Brave repository
+  lineinfile:
+    path: /etc/apt/sources.list.d/brave-browser-release.list
+    line: "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"
+    create: yes
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+
+- name: Install Brave browser
+  apt:
+    name: brave-browser
+    state: present
+
+- name: Remove temporary GPG key file
+  file:
+    path: /tmp/brave-browser-archive-keyring.gpg
+    state: absent
+
+# - name: "Install Spotify"
+#   ansible.builtin.apt:
+#     name: alacritty
+#     state: present
+#   become: true
