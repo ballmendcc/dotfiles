@@ -16,21 +16,25 @@
     dest: /tmp/spotify.gpg
 
 - name: Add Spotify GPG key
+  become: yes
   command: gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg /tmp/spotify.gpg
   register: gpg_key
   changed_when: gpg_key.rc == 0
 
 - name: Add Spotify repository
+  become: yes
   apt_repository:
     repo: 'deb http://repository.spotify.com stable non-free'
     filename: spotify
     state: present
 
 - name: Update apt cache
+  become: yes
   apt:
     update_cache: yes
 
 - name: Install Spotify
+  become: yes
   apt:
     name: spotify-client
     state: present
@@ -46,6 +50,7 @@
     dest: /tmp/microsoft.asc
 
 - name: Add Microsoft GPG key
+  become: yes
   command: gpg --dearmor /tmp/microsoft.asc
   register: gpg_key
   changed_when: gpg_key.stdout != ''
@@ -60,16 +65,19 @@
   notify: Remove temporary key file
 
 - name: Add VSCode repository
+  become: yes
   apt_repository:
     repo: 'deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main'
     filename: vscode
     state: present
 
 - name: Update apt cache
+  become: yes
   apt:
     update_cache: yes
 
 - name: Install Visual Studio Code
+  become: yes
   apt:
     name: code
     state: present
@@ -85,6 +93,7 @@
     dest: /tmp/brave-browser-archive-keyring.gpg
 
 - name: Install Brave GPG key
+  become: yes
   copy:
     src: /tmp/brave-browser-archive-keyring.gpg
     dest: /usr/share/keyrings/brave-browser-archive-keyring.gpg
@@ -93,16 +102,19 @@
     mode: '0644'
 
 - name: Add Brave repository
+  become: yes
   lineinfile:
     path: /etc/apt/sources.list.d/brave-browser-release.list
     line: "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"
     create: yes
 
 - name: Update apt cache
+  become: yes
   apt:
     update_cache: yes
 
 - name: Install Brave browser
+  become: yes
   apt:
     name: brave-browser
     state: present
