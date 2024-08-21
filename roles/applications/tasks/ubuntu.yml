@@ -10,6 +10,8 @@
     state: present
     update_cache: yes
 
+# SPOTIFY
+
 - name: Download Spotify GPG key
   get_url:
     url: https://download.spotify.com/debian/pubkey_6224F9941A8AA6D1.gpg
@@ -43,6 +45,8 @@
   file:
     path: /tmp/spotify.gpg
     state: absent
+
+# VSCODE
 
 - name: Download Microsoft GPG key
   get_url:
@@ -82,6 +86,8 @@
   loop:
     - microsoft.asc
 
+# BRAVE
+
 - name: Add Brave GPG key
   get_url:
     url: https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
@@ -117,6 +123,44 @@
 - name: Remove temporary GPG key file
   file:
     path: /tmp/brave-browser-archive-keyring.gpg
+    state: absent
+
+# NEXTCLOUD
+
+- name: Add Nextcloud GPG key
+  become: yes
+  get_url:
+    url: https://packages.nextcloud.com/nextcloud.asc
+    dest: /tmp/nextcloud.asc
+
+- name: Convert and install Nextcloud GPG key
+  become: yes
+  command: gpg --dearmor -o /usr/share/keyrings/nextcloud.asc /tmp/nextcloud.asc
+  args:
+    creates: /usr/share/keyrings/nextcloud.asc
+
+- name: Add Nextcloud repository
+  become: yes
+  apt_repository:
+    repo: 'deb [signed-by=/usr/share/keyrings/nextcloud.asc] https://packages.nextcloud.com/nextcloud/debian/ stable main'
+    filename: nextcloud
+    state: present
+
+- name: Update apt cache
+  become: yes
+  apt:
+    update_cache: yes
+
+- name: Install Nextcloud client
+  become: yes
+  apt:
+    name: nextcloud-client
+    state: present
+
+- name: Clean up temporary files
+  become: yes
+  file:
+    path: "/tmp/nextcloud.asc"
     state: absent
 
 # - name: "Install Spotify"
