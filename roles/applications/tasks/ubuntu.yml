@@ -127,23 +127,9 @@
 
 # NEXTCLOUD
 
-- name: Add Nextcloud GPG key
-  become: yes
-  get_url:
-    url: https://packages.nextcloud.com/nextcloud.asc
-    dest: /tmp/nextcloud.asc
-
-- name: Convert and install Nextcloud GPG key
-  become: yes
-  command: gpg --dearmor -o /usr/share/keyrings/nextcloud.asc /tmp/nextcloud.asc
-  args:
-    creates: /usr/share/keyrings/nextcloud.asc
-
-- name: Add Nextcloud repository
-  become: yes
+- name: Add Nextcloud client repository
   apt_repository:
-    repo: 'deb [signed-by=/usr/share/keyrings/nextcloud.asc] https://packages.nextcloud.com/nextcloud/debian/ stable main'
-    filename: nextcloud
+    repo: ppa:nextcloud-devs/client
     state: present
 
 - name: Update apt cache
@@ -152,16 +138,10 @@
     update_cache: yes
 
 - name: Install Nextcloud client
-  become: yes
   apt:
-    name: nextcloud-client
+    name: nextcloud-desktop
     state: present
-
-- name: Clean up temporary files
-  become: yes
-  file:
-    path: "/tmp/nextcloud.asc"
-    state: absent
+    update_cache: yes
 
 # - name: "Install Spotify"
 #   ansible.builtin.apt:
