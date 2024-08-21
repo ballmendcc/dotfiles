@@ -44,7 +44,7 @@
     dest: /usr/share/X11/xkb/symbols/custom
     owner: root
     group: root
-    mode: '0644'
+    mode: "0644"
   notify: Reload X11 keyboard configuration
   become: yes
 
@@ -77,7 +77,7 @@
 
 - name: Display results
   debug:
-    msg: 
+    msg:
       - "GNOME installed: {{ gnome_version.rc == 0 }}"
       - "dconf available: {{ dconf_path.rc == 0 }}"
       - "python3-psutil installed: {{ not psutil_check.changed }}"
@@ -108,15 +108,22 @@
     dest: /etc/X11/xorg.conf.d/00-keyboard.conf
     owner: root
     group: root
-    mode: '0644'
+    mode: "0644"
   notify: Reload X11 keyboard configuration
   become: yes
 
 - name: Keyboard | Set the custom layout system-wide (for init systems)
   ansible.builtin.lineinfile:
     path: /etc/default/keyboard
-    regexp: '^XKBLAYOUT='
+    regexp: "^XKBLAYOUT="
     line: 'XKBLAYOUT="custom"'
     create: yes
   notify: Reload X11 keyboard configuration
   become: yes
+
+- name: "Keyboard | Enable and start keyd service"
+  become: true
+  systemd:
+    name: keyd
+    enabled: true
+    state: restarted
