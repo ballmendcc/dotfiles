@@ -49,19 +49,12 @@
     url: https://packages.microsoft.com/keys/microsoft.asc
     dest: /tmp/microsoft.asc
 
-- name: Convert GPG key to the required format
+- name: Convert GPG key to the required format and move to /etc/apt/keyrings/
   become: yes
-  command: gpg --dearmor -o /tmp/packages.microsoft.gpg /tmp/microsoft.asc
-  creates: /tmp/packages.microsoft.gpg
-
-- name: Install Microsoft GPG key
-  become: yes
-  copy:
-    src: /tmp/packages.microsoft.gpg
-    dest: /etc/apt/keyrings/packages.microsoft.gpg
-    owner: root
-    group: root
-    mode: '0644'
+  command: >
+    gpg --dearmor -o /etc/apt/keyrings/packages.microsoft.gpg /tmp/microsoft.asc
+  args:
+    creates: /etc/apt/keyrings/packages.microsoft.gpg
 
 - name: Add VSCode repository
   become: yes
@@ -81,14 +74,13 @@
     name: code
     state: present
 
-- name: Remove temporary files
+- name: Clean up temporary files
   become: yes
   file:
     path: "/tmp/{{ item }}"
     state: absent
   loop:
     - microsoft.asc
-    - packages.microsoft.gpg
 
 - name: Add Brave GPG key
   get_url:
