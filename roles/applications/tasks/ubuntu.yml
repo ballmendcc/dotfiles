@@ -81,10 +81,14 @@
     name: code
     state: present
 
-- name: Remove temporary GPG key file
+- name: Remove temporary files
+  become: yes
   file:
-    path: /tmp/microsoft.asc
+    path: "/tmp/{{ item }}"
     state: absent
+  loop:
+    - microsoft.asc
+    - packages.microsoft.gpg
 
 - name: Add Brave GPG key
   get_url:
