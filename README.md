@@ -27,7 +27,7 @@ The `vault.secret` file allows you to encrypt values with `Ansible vault` and st
 
 ```bash
 mkdir ~/.ansible-vault
-vim ~/.ansible-vault/vault.secret
+vi ~/.ansible-vault/vault.secret
 ```
 
 ### 3 Install Dotfiles
