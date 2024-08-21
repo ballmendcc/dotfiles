@@ -104,17 +104,9 @@
 - name: gsettings | Create or update .dmrc file for the current user
   become: true
   ansible.builtin.template:
-    src: dmrc.j2
-    dest: "{{ ansible_user_dir }}/.dmrc"
+    src: custom.conf
+    dest: "/etc/gdm3/custom.conf"
     mode: '0644'
-
-- name: gsettings | Optionally set default GNOME session for all users (GDM)
-  lineinfile:
-    path: /etc/gdm3/custom.conf
-    regexp: '^#?DefaultSession='
-    line: 'DefaultSession=gnome.desktop'
-    state: present
-  become: true
 
 - name: gsettings | Install GNOME tweaks
   apt:
