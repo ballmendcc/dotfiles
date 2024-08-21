@@ -103,10 +103,9 @@
 
 - name: gsettings | Create or update .dmrc file for the current user
   become: true
-  template:
+  ansible.builtin.template:
     src: dmrc.j2
     dest: "{{ ansible_user_dir }}/.dmrc"
-    owner: "{{ ansible_user }}"
     mode: '0644'
 
 - name: gsettings | Optionally set default GNOME session for all users (GDM)
