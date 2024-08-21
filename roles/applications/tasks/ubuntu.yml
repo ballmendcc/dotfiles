@@ -128,6 +128,7 @@
 # NEXTCLOUD
 
 - name: Add Nextcloud client repository
+  become: yes
   apt_repository:
     repo: ppa:nextcloud-devs/client
     state: present
@@ -138,6 +139,7 @@
     update_cache: yes
 
 - name: Install Nextcloud client
+  become: yes
   apt:
     name: nextcloud-desktop
     state: present
