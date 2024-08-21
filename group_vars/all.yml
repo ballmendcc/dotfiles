@@ -40,6 +40,7 @@ default_roles:
   # - zoxide
   - keyboard
   - gsettings
+  - applications
 
 git_user_name: "ballmend"
 git_user_email: ballmend76@gmail.com
