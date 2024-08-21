@@ -56,7 +56,6 @@
       - dbus-x11
       - gnome-shell
     state: present
-    update_cache: yes
   become: true
 
 - name: Check if GNOME is installed
