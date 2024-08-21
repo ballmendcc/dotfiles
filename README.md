@@ -1,4 +1,4 @@
-Fully automated development environment forked from [TechDufus](https://www.twitch.tv/TechDufus).
+Fully automated development environment forked and adjusted from [TechDufus](https://www.twitch.tv/TechDufus).
 
 ## Goals
 
