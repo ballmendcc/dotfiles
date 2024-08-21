@@ -49,21 +49,19 @@
     url: https://packages.microsoft.com/keys/microsoft.asc
     dest: /tmp/microsoft.asc
 
-- name: Add Microsoft GPG key
+- name: Convert GPG key to the required format
   become: yes
-  command: gpg --dearmor /tmp/microsoft.asc
-  register: gpg_key
-  changed_when: gpg_key.stdout != ''
+  command: gpg --dearmor -o /tmp/packages.microsoft.gpg /tmp/microsoft.asc
+  creates: /tmp/packages.microsoft.gpg
 
 - name: Install Microsoft GPG key
   become: yes
   copy:
-    content: "{{ lookup('file', '/tmp/microsoft.gpg') }}"
+    src: /tmp/packages.microsoft.gpg
     dest: /etc/apt/keyrings/packages.microsoft.gpg
     owner: root
     group: root
     mode: '0644'
-  notify: Remove temporary key file
 
 - name: Add VSCode repository
   become: yes
