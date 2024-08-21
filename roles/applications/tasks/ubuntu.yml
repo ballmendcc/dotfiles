@@ -1,5 +1,6 @@
 ---
 - name: Ensure curl wget gpg and gnupg are installed
+  become: yes
   apt:
     name:
       - curl
