@@ -101,9 +101,9 @@
     state: present
   become: true
 
-- name: gsettings | Create or update .dmrc file for the current user
+- name: gsettings | Copy custom conf file for the current user
   become: true
-  ansible.builtin.template:
+  copy:
     src: custom.conf
     dest: "/etc/gdm3/custom.conf"
     mode: '0644'
