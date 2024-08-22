@@ -1,5 +1,0 @@
----
-- name: Restart GNOME Shell
-  ansible.builtin.command:
-    cmd: "gnome-shell --replace &"
-  when: ansible_facts['user_id'] != 0

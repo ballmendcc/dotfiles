@@ -27,7 +27,6 @@
     cmd: "gnome-extensions install --force {{ gsconnect_filename }}"
   args:
     removes: "{{ gsconnect_filename }}"
-  notify: Restart GNOME Shell
 
 - name: Clean up downloaded file
   ansible.builtin.file:
