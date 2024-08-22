@@ -1,0 +1,33 @@
+---
+- name: Ensure required packages are installed
+  ansible.builtin.apt:
+    name:
+      - curl
+      # - wget
+    state: present
+
+- name: Download GSConnect extension using curl
+  ansible.builtin.command:
+    cmd: "curl -L -o {{ gsconnect_filename }} {{ gsconnect_download_url }}"
+  args:
+    creates: "{{ gsconnect_filename }}"
+  when: ansible_facts['pkg_mgr'] != 'dnf'
+
+# - name: Download GSConnect extension using wget
+#   ansible.builtin.command:
+#     cmd: "wget -O {{ gsconnect_filename }} {{ gsconnect_download_url }}"
+#   args:
+#     creates: "{{ gsconnect_filename }}"
+#   when: ansible_facts['pkg_mgr'] == 'dnf'
+
+- name: Install GSConnect extension
+  ansible.builtin.command:
+    cmd: "gnome-extensions install --force {{ gsconnect_filename }}"
+  args:
+    removes: "{{ gsconnect_filename }}"
+  notify: Restart GNOME Shell
+
+- name: Clean up downloaded file
+  ansible.builtin.file:
+    path: "{{ gsconnect_filename }}"
+    state: absent

@@ -1,0 +1,4 @@
+---
+gsconnect_version: "v57"
+gsconnect_download_url: "https://github.com/GSConnect/gnome-shell-extension-gsconnect/releases/download/{{ gsconnect_version }}/gsconnect@andyholmes.github.io.zip"
+gsconnect_filename: "gsconnect@andyholmes.github.io.zip"
