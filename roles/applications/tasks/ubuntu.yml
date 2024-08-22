@@ -10,6 +10,18 @@
     state: present
     update_cache: yes
 
+# Gnome Shell Extentions
+
+- name: Ensure curl wget gpg and gnupg are installed
+  become: yes
+  apt:
+    name:
+      - gnome-shell
+      - gnome-shell-extension-manager
+      - gnome-shell-extension-prefs
+    state: present
+    update_cache: yes
+
 # SPOTIFY
 
 - name: Download Spotify GPG key
@@ -26,7 +38,7 @@
 - name: Add Spotify repository
   become: yes
   apt_repository:
-    repo: 'deb http://repository.spotify.com stable non-free'
+    repo: "deb http://repository.spotify.com stable non-free"
     filename: spotify
     state: present
 
@@ -63,7 +75,7 @@
 - name: Add VSCode repository
   become: yes
   apt_repository:
-    repo: 'deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main'
+    repo: "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main"
     filename: vscode
     state: present
 
@@ -100,7 +112,7 @@
     dest: /usr/share/keyrings/brave-browser-archive-keyring.gpg
     owner: root
     group: root
-    mode: '0644'
+    mode: "0644"
 
 - name: Add Brave repository
   become: yes
@@ -144,7 +156,6 @@
     name: nextcloud-desktop
     state: present
     update_cache: yes
-
 # - name: "Install Spotify"
 #   ansible.builtin.apt:
 #     name: alacritty
