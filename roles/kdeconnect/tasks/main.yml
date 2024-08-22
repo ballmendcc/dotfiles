@@ -1,5 +1,6 @@
 ---
 - name: Ensure required packages are installed
+  become: yes
   ansible.builtin.apt:
     name:
       - curl
@@ -21,6 +22,7 @@
 #   when: ansible_facts['pkg_mgr'] == 'dnf'
 
 - name: Install GSConnect extension
+  become: yes
   ansible.builtin.command:
     cmd: "gnome-extensions install --force {{ gsconnect_filename }}"
   args:
