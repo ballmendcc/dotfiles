@@ -41,6 +41,7 @@ default_roles:
   - keyboard
   - gsettings
   - applications
+  - kdeconnect
 
 git_user_name: "ballmend"
 git_user_email: ballmend76@gmail.com
@@ -120,4 +121,3 @@ ssh_key:
 
   id_ed25519.pub: |
     ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJTqXbiqzBmzspfLzwwTECGpKENVGNdWKjRAHYET1P61 benedikt.allmendinger@cleanercode.de
-
