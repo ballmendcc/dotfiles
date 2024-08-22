@@ -24,14 +24,14 @@ xkb_symbols "basic" {
     key <AD05> {	[	  t,	T		]	};
     key <AD06> {	[	  bracketright,	braceright		]	};
     key <AD07> {	[	  y,	Y		]	};
-    key <AD08> {	[	  u,	U		]	};
+    key <AD08> {	[	  u,	U	,   udiaeresis, Udiaeresis 	]	};
     key <AD09> {	[	  i,	I		]	};
-    key <AD10> {	[	  o,	O		]	};
+    key <AD10> {	[	  o,	O	,          odiaeresis, Odiaeresis 	]	};
     key <AD11> {	[ p,	P	]	};
     key <AD12> {	[ bracketleft,	braceleft	]	};
     
-    key <AC01> {	[	  a,	A 		]	};
-    key <AC02> {	[	  s,	S		]	};
+    key <AC01> {	[	  a,	A 	, adiaeresis, Adiaeresis	]	};
+    key <AC02> {	[	  s,	S	,          ssharp,     U1E9E	]	};
     key <AC03> {	[	  d,	D		]	};
     key <AC04> {	[	  f,	F		]	};
     key <AC05> {	[	  g,	G		]	};
@@ -54,8 +54,8 @@ xkb_symbols "basic" {
     key <AB10> {	[    period,	greater 	]	};
 
     key <BKSL> {	[ backslash,         bar	]	};
-    
-    # key <TAB> {	[ a,         A	]	};
+
+    include "level3(ralt_switch)"
     
 };
 
