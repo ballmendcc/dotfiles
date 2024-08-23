@@ -176,8 +176,8 @@
 
 - name: Download VBox GPG key
   get_url:
-    url: https://www.virtualbox.org/download/oracle_vbox.asc
-    dest: /tmp/oracle_vbox.asc
+    url: https://www.virtualbox.org/download/oracle_vbox_2016.asc
+    dest: /tmp/oracle_vbox_2016.asc
 
 - name: Convert GPG key to the required format and move to /etc/apt/keyrings/
   become: yes
