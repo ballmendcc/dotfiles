@@ -1,11 +1,13 @@
 ---
-- name: gsettings | Install required packages for dconf
+- name: gsettings | Install required packages for dconf and gsettings
   apt:
     name:
       - python3-psutil
       - dconf-cli
       - dbus-x11
       - gnome-shell
+      - xdotool
+      - wmctrl
     state: present
   become: true
 
