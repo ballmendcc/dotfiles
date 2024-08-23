@@ -174,41 +174,46 @@
 
 # VIRTUAL BOX
 
-# - name: Download VBox GPG key
-#   get_url:
-#     url: https://www.virtualbox.org/download/oracle_vbox.asc
-#     dest: /tmp/oracle_vbox.asc
-
-# - name: Convert GPG key to the required format and move to /etc/apt/keyrings/
-#   become: yes
-#   command: >
-#     gpg --yes --output /usr/share/keyrings/oracle-virtualbox-2016.gpg --dearmor oracle_vbox_2016.asc
-#   args:
-#     creates: /etc/apt/keyrings/oracle-virtualbox-2016.gpg
-
-# - name: Add VBox repository
-#   become: yes
-#   apt_repository:
-#     repo: "deb [arch=amd64 signed-by=/usr/share/keyrings/oracle-virtualbox-2016.gpg] https://download.virtualbox.org/virtualbox/debian {{ ansible_distribution_release | lower }} contrib"
-#     filename: vscode
-#     state: present
-
-- name: Add Oracle public key
-  become: yes
-  apt_key:
+- name: Download VBox GPG key
+  get_url:
     url: https://www.virtualbox.org/download/oracle_vbox.asc
-    state: present
+    dest: /tmp/oracle_vbox.asc
+
+- name: Convert GPG key to the required format and move to /etc/apt/keyrings/
+  become: yes
+  command: >
+    gpg --yes --output /usr/share/keyrings/oracle-virtualbox-2016.gpg --dearmor oracle_vbox_2016.asc
+  args:
+    creates: /etc/apt/keyrings/oracle-virtualbox-2016.gpg
 
 - name: Get Ubuntu codename
   shell: lsb_release -cs
   register: ubuntu_codename
   changed_when: false
 
-- name: Add VirtualBox repository
+- name: Add VBox repository
   become: yes
   apt_repository:
-    repo: "deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian {{ ubuntu_codename.stdout }} contrib"
+    repo: "deb [arch=amd64 signed-by=/usr/share/keyrings/oracle-virtualbox-2016.gpg] https://download.virtualbox.org/virtualbox/debian {{ ubuntu_codename.stdout }} contrib"
+    filename: vscode
     state: present
+
+# - name: Add Oracle public key
+#   become: yes
+#   apt_key:
+#     url: https://www.virtualbox.org/download/oracle_vbox.asc
+#     state: present
+
+# - name: Get Ubuntu codename
+#   shell: lsb_release -cs
+#   register: ubuntu_codename
+#   changed_when: false
+
+# - name: Add VirtualBox repository
+#   become: yes
+#   apt_repository:
+#     repo: "deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian {{ ubuntu_codename.stdout }} contrib"
+#     state: present
 
 - name: Update package lists
   become: yes
