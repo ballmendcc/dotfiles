@@ -1,6 +1,6 @@
 [User]
 # Language=en_US.UTF-8
-Session=gnome
+Session=gnome-xorg
 # Background=/usr/share/backgrounds/gnome/adwaita-day.jpg
 Icon=/home/ballmend/.face
 AutomaticLogin=true
