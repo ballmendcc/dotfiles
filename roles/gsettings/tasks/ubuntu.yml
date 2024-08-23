@@ -24,71 +24,225 @@
 - name: gsettings | Set up custom keybindings for desktops 1-12
   community.general.dconf:
     key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings
-    value: "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/',\
-             '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/',\
-             '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/',\
-             '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/',\
-             '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/',\
-             '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/',\
-             '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom6/',\
-             '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom7/',\
-             '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom8/',\
-             '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom9/',\
-             '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom10/',\
-             '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom11/']"
+    value:
+      "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/',\
+      '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/',\
+      '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/',\
+      '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/',\
+      '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/',\
+      '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/',\
+      '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom6/',\
+      '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom7/',\
+      '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom8/',\
+      '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom9/',\
+      '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom10/',\
+      '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom11/']"
 
 - name: gsettings | Set keybindings for desktops 1-12
   community.general.dconf:
     key: "{{ item.key }}"
     value: "{{ item.value }}"
-  loop: 
-    - { key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name', value: "'Switch to Desktop 1'" }
-    - { key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command', value: "'wmctrl -s 0'" }
-    - { key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding', value: "'<Ctrl><Alt><Super><Shift>F1'" }
-    
-    - { key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/name', value: "'Switch to Desktop 2'" }
-    - { key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/command', value: "'wmctrl -s 1'" }
-    - { key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/binding', value: "'<Ctrl><Alt><Super><Shift>F2'" }
-    
-    - { key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/name', value: "'Switch to Desktop 3'" }
-    - { key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/command', value: "'wmctrl -s 2'" }
-    - { key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/binding', value: "'<Ctrl><Alt><Super><Shift>F3'" }
+  loop:
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name",
+        value: "'Switch to Desktop 1'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command",
+        value: "'wmctrl -s 0'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding",
+        value: "'<Ctrl><Alt><Super><Shift>F1'",
+      }
 
-    - { key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/name', value: "'Switch to Desktop 4'" }
-    - { key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/command', value: "'wmctrl -s 3'" }
-    - { key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/binding', value: "'<Ctrl><Alt><Super><Shift>F4'" }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/name",
+        value: "'Switch to Desktop 2'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/command",
+        value: "'wmctrl -s 1'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/binding",
+        value: "'<Ctrl><Alt><Super><Shift>F2'",
+      }
 
-    - { key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/name', value: "'Switch to Desktop 5'" }
-    - { key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/command', value: "'wmctrl -s 4'" }
-    - { key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/binding', value: "'<Ctrl><Alt><Super><Shift>F5'" }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/name",
+        value: "'Switch to Desktop 3'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/command",
+        value: "'wmctrl -s 2'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/binding",
+        value: "'<Ctrl><Alt><Super><Shift>F3'",
+      }
 
-    - { key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/name', value: "'Switch to Desktop 6'" }
-    - { key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/command', value: "'wmctrl -s 5'" }
-    - { key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/binding', value: "'<Ctrl><Alt><Super><Shift>F6'" }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/name",
+        value: "'Switch to Desktop 4'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/command",
+        value: "'wmctrl -s 3'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/binding",
+        value: "'<Ctrl><Alt><Super><Shift>F4'",
+      }
 
-    - { key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom6/name', value: "'Switch to Desktop 7'" }
-    - { key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom6/command', value: "'wmctrl -s 6'" }
-    - { key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom6/binding', value: "'<Ctrl><Alt><Super><Shift>F7'" }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/name",
+        value: "'Switch to Desktop 5'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/command",
+        value: "'wmctrl -s 4'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/binding",
+        value: "'<Ctrl><Alt><Super><Shift>F5'",
+      }
 
-    - { key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom7/name', value: "'Switch to Desktop 8'" }
-    - { key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom7/command', value: "'wmctrl -s 7'" }
-    - { key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom7/binding', value: "'<Ctrl><Alt><Super><Shift>F8'" }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/name",
+        value: "'Switch to Desktop 6'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/command",
+        value: "'wmctrl -s 5'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/binding",
+        value: "'<Ctrl><Alt><Super><Shift>F6'",
+      }
 
-    - { key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom8/name', value: "'Switch to Desktop 9'" }
-    - { key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom8/command', value: "'wmctrl -s 8'" }
-    - { key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom8/binding', value: "'<Ctrl><Alt><Super><Shift>F9'" }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom6/name",
+        value: "'Switch to Desktop 7'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom6/command",
+        value: "'wmctrl -s 6'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom6/binding",
+        value: "'<Ctrl><Alt><Super><Shift>F7'",
+      }
 
-    - { key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom9/name', value: "'Switch to Desktop 10'" }
-    - { key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom9/command', value: "'wmctrl -s 9'" }
-    - { key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom9/binding', value: "'<Ctrl><Alt><Super><Shift>F10'" }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom7/name",
+        value: "'Switch to Desktop 8'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom7/command",
+        value: "'wmctrl -s 7'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom7/binding",
+        value: "'<Ctrl><Alt><Super><Shift>F8'",
+      }
 
-    - { key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom10/name', value: "'Switch to Desktop 11'" }
-    - { key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom10/command', value: "'wmctrl -s 10'" }
-    - { key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom10/binding', value: "'<Ctrl><Alt><Super><Shift>F11'" }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom8/name",
+        value: "'Switch to Desktop 9'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom8/command",
+        value: "'wmctrl -s 8'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom8/binding",
+        value: "'<Ctrl><Alt><Super><Shift>F9'",
+      }
 
-    - { key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom11/name', value: "'Switch to Desktop 12'" }
-    - { key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom11/command', value: "'wmctrl -s 11'" }
-    - { key: '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom11/binding', value: "'<Ctrl><Alt><Super><Shift>F12'" }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom9/name",
+        value: "'Switch to Desktop 10'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom9/command",
+        value: "'wmctrl -s 9'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom9/binding",
+        value: "'<Ctrl><Alt><Super><Shift>F10'",
+      }
+
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom10/name",
+        value: "'Switch to Desktop 11'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom10/command",
+        value: "'wmctrl -s 10'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom10/binding",
+        value: "'<Ctrl><Alt><Super><Shift>F11'",
+      }
+
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom11/name",
+        value: "'Switch to Desktop 12'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom11/command",
+        value: "'wmctrl -s 11'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom11/binding",
+        value: "'<Ctrl><Alt><Super><Shift>F12'",
+      }
+    # Take window with you
+    # - {
+    #     key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap0/name",
+    #     value: "'Switch to Window to Desktop 1'",
+    #   }
+    # - {
+    #     key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap0/command",
+    #     value: "'$HOME/bin/switch-window.sh 0'",
+    #   }
+    # - {
+    #     key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap0/binding",
+    #     value: "'<Ctrl><Super><Shift>F1'",
+    #   }
+
+- name: gsettings | Set keybindings for switching window to desktops 1-12 with custom script
+  community.general.dconf:
+    key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap{{ item }}/{{ item_key }}"
+    value: "{{ item_value }}"
+  loop: "{{ range(0, 12) | list }}"
+  loop_control:
+    loop_var: item
+    index_var: idx
+  vars:
+    bindings:
+      - { key: "name", value: "Switch current Window to Desktop {{ idx + 1 }}" }
+      - {
+          key: "command",
+          value: "'{{ ansible_user_dir }}/bin/switch-window.sh {{ idx }}'",
+        }
+      - { key: "binding", value: "'<Ctrl><Super><Shift>F{{ idx + 1 }}'" }
+  with_items: "{{ bindings }}"
+
+- name: Ensure ~/bin/ directory exists
+  become: true
+  file:
+    path: "{{ ansible_user_dir }}/bin"
+    state: directory
+    mode: "0755"
+
+- name: gsettings | Copy switch-window file
+  become: true
+  copy:
+    src: switch-window.sh
+    dest: "{{ ansible_user_dir }}/bin/switch-window.sh"
+    mode: "0755"
 
 - name: gsettings | Disable GNOME animations
   community.general.dconf:
@@ -106,14 +260,14 @@
   copy:
     src: custom.conf
     dest: "/etc/gdm3/custom.conf"
-    mode: '0644'
+    mode: "0644"
 
 - name: gsettings | Copy custom user session configuration file for the current user
   become: true
   copy:
     src: ballmend
     dest: "/var/lib/AccountsService/users/ballmend"
-    mode: '0644'
+    mode: "0644"
 
 - name: gsettings | Install GNOME tweaks
   apt:
