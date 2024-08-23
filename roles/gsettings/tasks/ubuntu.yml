@@ -36,7 +36,19 @@
       '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom8/',\
       '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom9/',\
       '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom10/',\
-      '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom11/']"
+      '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom11/',\
+      '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap0/',\
+      '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap1/',\
+      '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap2/',\
+      '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap3/',\
+      '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap4/',\
+      '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap5/',\
+      '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap6/',\
+      '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap7/',\
+      '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap8/',\
+      '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap9/',\
+      '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap10/',\
+      '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap11/']"
 
 - name: gsettings | Set keybindings for desktops 1-12
   community.general.dconf:
@@ -199,36 +211,161 @@
         value: "'<Ctrl><Alt><Super><Shift>F12'",
       }
     # Take window with you
-    # - {
-    #     key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap0/name",
-    #     value: "'Switch to Window to Desktop 1'",
-    #   }
-    # - {
-    #     key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap0/command",
-    #     value: "'$HOME/bin/switch-window.sh 0'",
-    #   }
-    # - {
-    #     key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap0/binding",
-    #     value: "'<Ctrl><Super><Shift>F1'",
-    #   }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap0/name",
+        value: "'Switch to Window to Desktop 1'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap0/command",
+        value: "'$HOME/bin/switch-window.sh 0'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap0/binding",
+        value: "'<Ctrl><Super><Shift>F1'",
+      }
 
-- name: gsettings | Set keybindings for switching window to desktops 1-12 with custom script
-  community.general.dconf:
-    key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap{{ item }}/{{ item_key }}"
-    value: "{{ item_value }}"
-  loop: "{{ range(0, 12) | list }}"
-  loop_control:
-    loop_var: item
-    index_var: idx
-  vars:
-    bindings:
-      - { key: "name", value: "Switch current Window to Desktop {{ idx + 1 }}" }
-      - {
-          key: "command",
-          value: "'{{ ansible_user_dir }}/bin/switch-window.sh {{ idx }}'",
-        }
-      - { key: "binding", value: "'<Ctrl><Super><Shift>F{{ idx + 1 }}'" }
-  with_items: "{{ bindings }}"
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap1/name",
+        value: "'Switch to Window to Desktop 2'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap1/command",
+        value: "'$HOME/bin/switch-window.sh 1'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap1/binding",
+        value: "'<Ctrl><Super><Shift>F2'",
+      }
+
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap2/name",
+        value: "'Switch to Window to Desktop 3'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap2/command",
+        value: "'$HOME/bin/switch-window.sh 2'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap2/binding",
+        value: "'<Ctrl><Super><Shift>F3'",
+      }
+
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap3/name",
+        value: "'Switch to Window to Desktop 4'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap3/command",
+        value: "'$HOME/bin/switch-window.sh 3'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap3/binding",
+        value: "'<Ctrl><Super><Shift>F4'",
+      }
+
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap4/name",
+        value: "'Switch to Window to Desktop 5'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap4/command",
+        value: "'$HOME/bin/switch-window.sh 4'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap4/binding",
+        value: "'<Ctrl><Super><Shift>F5'",
+      }
+
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap5/name",
+        value: "'Switch to Window to Desktop 6'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap5/command",
+        value: "'$HOME/bin/switch-window.sh 5'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap5/binding",
+        value: "'<Ctrl><Super><Shift>F6'",
+      }
+
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap6/name",
+        value: "'Switch to Window to Desktop 7'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap6/command",
+        value: "'$HOME/bin/switch-window.sh 6'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap6/binding",
+        value: "'<Ctrl><Super><Shift>F7'",
+      }
+
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap7/name",
+        value: "'Switch to Window to Desktop 8'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap7/command",
+        value: "'$HOME/bin/switch-window.sh 7'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap7/binding",
+        value: "'<Ctrl><Super><Shift>F8'",
+      }
+
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap8/name",
+        value: "'Switch to Window to Desktop 9'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap8/command",
+        value: "'$HOME/bin/switch-window.sh 8'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap8/binding",
+        value: "'<Ctrl><Super><Shift>F9'",
+      }
+
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap9/name",
+        value: "'Switch to Window to Desktop 10'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap9/command",
+        value: "'$HOME/bin/switch-window.sh 9'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap9/binding",
+        value: "'<Ctrl><Super><Shift>F10'",
+      }
+
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap10/name",
+        value: "'Switch to Window to Desktop 11'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap10/command",
+        value: "'$HOME/bin/switch-window.sh 10'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap10/binding",
+        value: "'<Ctrl><Super><Shift>F11'",
+      }
+
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap11/name",
+        value: "'Switch to Window to Desktop 12'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap11/command",
+        value: "'$HOME/bin/switch-window.sh 11'",
+      }
+    - {
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/customswap11/binding",
+        value: "'<Ctrl><Super><Shift>F12'",
+      }
 
 - name: Ensure ~/bin/ directory exists
   become: true
