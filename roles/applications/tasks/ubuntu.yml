@@ -184,7 +184,7 @@
   command: >
     gpg --yes --output /usr/share/keyrings/oracle-virtualbox-2016.gpg --dearmor oracle_vbox_2016.asc
   args:
-    creates: /etc/apt/keyrings/oracle-virtualbox-2016.gpg
+    creates: /usr/share/keyrings/oracle-virtualbox-2016.gpg
 
 - name: Get Ubuntu codename
   shell: lsb_release -cs
@@ -195,7 +195,7 @@
   become: yes
   apt_repository:
     repo: "deb [arch=amd64 signed-by=/usr/share/keyrings/oracle-virtualbox-2016.gpg] https://download.virtualbox.org/virtualbox/debian {{ ubuntu_codename.stdout }} contrib"
-    filename: vscode
+    filename: virtualbox
     state: present
 
 # - name: Add Oracle public key
