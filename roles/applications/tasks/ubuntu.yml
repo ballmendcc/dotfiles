@@ -182,7 +182,7 @@
 - name: Convert GPG key to the required format and move to /etc/apt/keyrings/
   become: yes
   command: >
-    gpg --yes --output /usr/share/keyrings/oracle-virtualbox-2016.gpg --dearmor oracle_vbox_2016.asc
+    gpg --yes --output /usr/share/keyrings/oracle-virtualbox-2016.gpg --dearmor /tmp/oracle_vbox_2016.asc
   args:
     creates: /usr/share/keyrings/oracle-virtualbox-2016.gpg
 
