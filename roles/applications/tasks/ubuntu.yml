@@ -164,13 +164,11 @@
   ansible.builtin.apt:
     name: snapd
     state: present
-  register: snap_install_result
 
 - name: Install NordVPN
   become: yes
   ansible.builtin.command:
     cmd: snap install nordvpn
-  when: snap_install_result is changed
 
 # VIRTUAL BOX
 
@@ -223,5 +221,5 @@
 - name: Install VirtualBox
   become: yes
   apt:
-    name: virtualbox-latest
+    name: virtualbox-7.0
     state: present
