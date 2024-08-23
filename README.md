@@ -42,7 +42,6 @@ This shell script is also used to initialize your environment after installing `
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/ballmendcc/dotfiles/main/bin/dotfiles)"
 ```
 
-
 ### Update
 
 This repository is continuously updated with new features and settings which become available to you when updating.
@@ -66,11 +65,13 @@ This `dotfiles` command is available to you after the first use of this repo, as
 Any flags or arguments you pass to the `dotfiles` command are passed as-is to the `ansible-playbook` command.
 
 For Example: Running the tmux tag with verbosity
+
 ```bash
 dotfiles -t tmux -vvv
 ```
 
 ### Hint
+
 To then encrypt values with your vault password use the following:
 
 ```bash
@@ -81,6 +82,7 @@ $ cat myfile.conf | ansible-vault encrypt_string --vault-password-file $HOME/.an
 > NOTE: This file will automatically be detected by the playbook when running `dotfiles` command to decrypt values. Read more on Ansible Vault [here](https://docs.ansible.com/ansible/latest/user_guide/vault.html).
 
 If you want to run only a specific role, you can specify the following bash command:
+
 ```bash
-curl -fsSL https://raw.githubusercontent.com/TechDufus/dotfiles/main/bin/dotfiles | bash -s -- --tags comma,seperated,tags
+curl -fsSL https://raw.githubusercontent.com/ballmendcc/dotfiles/main/bin/dotfiles | bash -s -- --tags comma,seperated,tags
 ```

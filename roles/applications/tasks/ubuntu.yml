@@ -156,8 +156,43 @@
     name: nextcloud-desktop
     state: present
     update_cache: yes
-# - name: "Install Spotify"
-#   ansible.builtin.apt:
-#     name: alacritty
-#     state: present
-#   become: true
+
+# NORDVPN
+
+- name: Ensure Snap is installed
+  become: yes
+  ansible.builtin.apt:
+    name: snapd
+    state: present
+  register: snap_install_result
+
+- name: Install NordVPN
+  become: yes
+  ansible.builtin.command:
+    cmd: snap install nordvpn
+  when: snap_install_result is changed
+
+# VIRTUAL BOX
+
+- name: Add Oracle public key
+  become: yes
+  apt_key:
+    url: https://www.virtualbox.org/download/oracle_vbox.asc
+    state: present
+
+- name: Add VirtualBox repository
+  become: yes
+  apt_repository:
+    repo: deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian $(lsb_release -cs) contrib
+    state: present
+
+- name: Update package lists
+  become: yes
+  apt:
+    update_cache: yes
+
+- name: Install VirtualBox
+  become: yes
+  apt:
+    name: virtualbox-latest
+    state: present
