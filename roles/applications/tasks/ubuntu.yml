@@ -226,6 +226,25 @@
 
 # BALENA ETCHER
 
+# - name: Download BALENA ETCHER GPG key
+#   get_url:
+#     url: https://dl.cloudsmith.io/public/balena/etcher/gpg.70528471AFF9A051.key
+#     dest: /tmp/balenaetcher.key
+
+# - name: Convert GPG key to the required format and move to /etc/apt/keyrings/
+#   become: yes
+#   command: >
+#     gpg --yes --output /usr/share/keyrings/balena-etcher.gpg --dearmor /tmp/balenaetcher.key
+#   args:
+#     creates: /usr/share/keyrings/balena-etcher.gpg
+
+# - name: Add BALENA ETCHER repository
+#   become: yes
+#   apt_repository:
+#     repo: "deb [arch=amd64 signed-by=/usr/share/keyrings/oracle-virtualbox-2016.gpg] https://download.virtualbox.org/virtualbox/debian {{ ubuntu_codename.stdout }} contrib"
+#     filename: virtualbox
+#     state: present
+
 - name: Download and run Balena Etcher setup script
   become: yes
   ansible.builtin.shell:
@@ -233,11 +252,11 @@
   args:
     creates: "/etc/apt/sources.list.d/balena-etcher.list"
 
-- name: Import Balena Etcher GPG key
-  become: yes
-  ansible.builtin.apt_key:
-    url: https://deb.etcher.io/keyring.gpg
-    state: present
+# - name: Import Balena Etcher GPG key
+#   become: yes
+#   ansible.builtin.apt_key:
+#     url: https://deb.etcher.io/keyring.gpg
+#     state: present
 
 - name: Update apt cache
   become: yes
