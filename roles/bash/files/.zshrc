@@ -92,23 +92,25 @@ zstyle :omz:plugins:ssh-agent identities id_ed25519
 plugins=(
   git
   ssh-agent
+  zsh-syntax-highlighting
   zsh-history-substring-search
   zsh-autosuggestions
-  zsh-syntax-highlighting
-  zsh-navigation-tools
+  # zsh-navigation-tools
   asdf
   fzf-zsh-plugin
-  zsh-bat
+  # zsh-bat
 )
 
 source $ZSH/oh-my-zsh.sh
-
 
 for file in $HOME/.config/zsh/*.sh; do
   source "$file"
 done
 
 # User configuration
+
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
