@@ -151,7 +151,7 @@ bindkey '^[[B' history-substring-search-down
 
 # function hopps() {
 #   local dirs
-#   pushd ~/code/autostart >/dev/null  # Change to ~/code/my_projects directory and hide output
+#   pushd ~/Code >/dev/null  # Change to ~/code/my_projects directory and hide output
 #   dirs=(*(/))
 #   select dir in $dirs; do
 #     if [[ -n $dir ]]; then
@@ -227,9 +227,9 @@ bindkey '^[[B' history-substring-search-down
 #
 # create 2 windows with nvim. one for the workspaces, one for the project setup bashscript (this is the easy one)
 function createProject () {
-  cp -rf ~/code/autostart/example ~/code/autostart/$1
-  mv ~/code/autostart/$1/example.sh ~/code/autostart/$1/$1.sh
-  mv ~/code/autostart/$1/example.code-workspace ~/code/autostart/$1/$1.code-workspace
+  cp -rf ~/Code/example ~/Code/$1
+  mv ~/Code/$1/example.sh ~/Code/$1/$1.sh
+  mv ~/Code/$1/example.code-workspace ~/Code/$1/$1.code-workspace
 }
 
 function wad () {
@@ -262,14 +262,14 @@ function clone-new() {
   # fi
 
   # Check if the target directory does not exist and then proceed
-  if [ ! -d "~/code/autostart/$1" ]; then
+  if [ ! -d "~/Code/$1" ]; then
     # Copy the example directory to a new location based on the first argument
     createProject $1
   else
-    echo "The directory ~/code/autostart/$1 already exists. Adding the repo"
+    echo "The directory ~/Code/$1 already exists. Adding the repo"
   fi
 
-  cd ~/code/autostart/$1/repos
+  cd ~/Code/$1/repos
   git clone "$2"
 
   # Append a function to the .zshrc file using the variable for the function name
@@ -279,12 +279,12 @@ function clone-new() {
   source ~/.zshrc
 
   # Open the directory in VS Code
-  code ~/code/autostart/$1
+  code ~/Code/$1
 }
 
 
 function exampleproject () {
-  # Replace example with the name of the folder inside ~/code/autostart, of your project
+  # Replace example with the name of the folder inside ~/Code, of your project
   autostart example
 }
 
@@ -316,7 +316,7 @@ function autostart () {
 function autostartexe(){
     # Project folder name
     if [ -n "$1" ]; then
-      cd ~/code/autostart/$1
+      cd ~/Code/$1
     fi
 
     # Find a .code-workspace file in the current directory
@@ -504,12 +504,5 @@ function glf() { git log --all --grep="$1"; }
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 
 
-
-function vbg() { echo "Autostart vim-be-good"; autostart vbg; }
-function algo() { echo "Autostart algo"; autostart algo; }
-
-alias aws='ssh -i "grafana_ssh.pem" ubuntu@ec2-13-60-8-183.eu-north-1.compute.amazonaws.com'
-function health() { echo "Autostart health"; autostart health; }
-function ccv() { echo "Autostart epneu"; autostart epneu; }
-function ctm() { echo "Autostart ctm"; autostart ctm; }
-function ansible() { echo "Autostart ansible"; autostart ansible; }
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+function dot() { echo "Autostart dotrepo"; autostart dotrepo; }
