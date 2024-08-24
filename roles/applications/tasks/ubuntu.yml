@@ -223,6 +223,13 @@
   apt:
     name: virtualbox-7.0
     state: present
+
+# DISCORD
+
+- name: Install Discord
+  become: yes
+  ansible.builtin.command:
+    cmd: snap install discord
 # BALENA ETCHER
 
 # - name: Download BALENA ETCHER GPG key
