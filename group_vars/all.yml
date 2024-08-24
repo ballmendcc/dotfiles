@@ -44,6 +44,7 @@ default_roles:
   - kdeconnect
   # - platformio
   # - my-project-management-cli-tool
+  # - test
 
 git_user_name: "ballmendcc"
 git_user_email: ballmend33@gmail.com
