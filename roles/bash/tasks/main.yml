@@ -67,13 +67,13 @@
   copy:
     src: "themes/.p10k.zsh"
     dest: "{{ ansible_user_dir }}/.p10k.zsh"
-    mode: '0644'
+    mode: "0644"
   become: false
 
 - name: "Update .zshrc to use Powerlevel10k"
   lineinfile:
     path: "{{ ansible_user_dir }}/.zshrc"
-    regexp: '^ZSH_THEME='
+    regexp: "^ZSH_THEME="
     line: 'ZSH_THEME="powerlevel10k/powerlevel10k"'
     state: present
   become: false
@@ -82,7 +82,7 @@
   lineinfile:
     path: "{{ ansible_user_dir }}/.zshrc"
     regexp: '^\[\[ -f ~/.p10k.zsh \]\] && source ~/.p10k.zsh'
-    line: '[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh'
+    line: "[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh"
     state: present
   become: false
 
@@ -135,3 +135,52 @@
   when:
     - zsh_os_config is defined
     - zsh_os_config.stat.exists
+
+# ZSH PLUGINS
+
+- name: Clone zsh-autosuggestions
+  git:
+    repo: https://github.com/zsh-users/zsh-autosuggestions
+    dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+    version: main
+
+- name: Clone zsh-syntax-highlighting
+  git:
+    repo: https://github.com/zsh-users/zsh-syntax-highlighting
+    dest: ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+    version: main
+
+- name: Clone zsh-navigation-tools
+  git:
+    repo: https://github.com/psprint/zsh-navigation-tools
+    dest: ~/.oh-my-zsh/custom/plugins/zsh-navigation-tools
+    version: master
+
+- name: Clone zsh-history-substring-search
+  git:
+    repo: https://github.com/zsh-users/zsh-history-substring-search
+    dest: ~/.oh-my-zsh/custom/plugins/zsh-history-substring-search
+    version: master
+
+- name: Clone fzf-zsh-plugin
+  git:
+    repo: https://github.com/unixorn/fzf-zsh-plugin
+    dest: ~/.oh-my-zsh/custom/plugins/fzf-zsh-plugin
+    version: master
+
+- name: Clone zsh-bat
+  git:
+    repo: https://github.com/foxlets/zsh-bat
+    dest: ~/.oh-my-zsh/custom/plugins/zsh-bat
+    version: master
+
+- name: Clone asdf
+  git:
+    repo: https://github.com/asdf-vm/asdf
+    dest: ~/.oh-my-zsh/custom/plugins/asdf
+    version: master
+
+- name: Reload Zsh config
+  shell: source ~/.zshrc
+  args:
+    executable: /bin/zsh
