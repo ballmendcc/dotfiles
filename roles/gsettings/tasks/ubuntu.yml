@@ -413,11 +413,11 @@
     name: gnome-tweaks
     state: present
   become: true
-
-- name: Disable ballmend user password
-  ansible.builtin.user:
-    name: ballmend
-    password_lock: true
+#
+#- name: Disable ballmend user password
+#  ansible.builtin.user:
+#    name: ballmend
+ #   password_lock: true
 # - name: Disable user password
 #   ansible.builtin.user:
 #     name: root
