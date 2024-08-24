@@ -14,3 +14,4 @@ workspace_number=$(echo "$1" | tr -d '[:space:]')
 
 # Move the active window to the specified workspace
 wmctrl -i -r "$active_window_id" -t $workspace_number
+wmctrl -s $workspace_number
