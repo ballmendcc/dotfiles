@@ -223,3 +223,29 @@
   apt:
     name: virtualbox-7.0
     state: present
+
+# BALENA ETCHER
+
+- name: Download and run Balena Etcher setup script
+  become: yes
+  ansible.builtin.shell:
+    cmd: "curl -1sLf 'https://dl.cloudsmith.io/public/balena/etcher/setup.deb.sh' | sudo -E bash"
+  args:
+    creates: "/etc/apt/sources.list.d/balena-etcher.list"
+
+- name: Import Balena Etcher GPG key
+  become: yes
+  ansible.builtin.apt_key:
+    url: https://deb.etcher.io/keyring.gpg
+    state: present
+
+- name: Update apt cache
+  become: yes
+  ansible.builtin.apt:
+    update_cache: yes
+
+- name: Install Balena Etcher
+  become: yes
+  ansible.builtin.apt:
+    name: balena-etcher-electron
+    state: present
