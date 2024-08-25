@@ -17,6 +17,7 @@
   apt:
     name:
       - gnome-shell
+      - gnome-shell-extensions
       - gnome-shell-extension-manager
       - gnome-shell-extension-prefs
     state: present
@@ -230,6 +231,13 @@
   become: yes
   ansible.builtin.command:
     cmd: snap install discord
+
+# PINTA for Images
+
+- name: Install Pinta
+  become: yes
+  ansible.builtin.command:
+    cmd: snap install pinta
 # BALENA ETCHER
 
 # - name: Download BALENA ETCHER GPG key
