@@ -225,6 +225,14 @@
     name: virtualbox-7.0
     state: present
 
+# LIBRE OFFICE
+
+- name: Install LIBRE OFFICE
+  become: yes
+  apt:
+    name: libreoffice
+    state: present
+
 # DISCORD
 
 - name: Install Discord
