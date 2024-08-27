@@ -249,35 +249,27 @@
 
 # GH CLI
 
-- name: Ensure wget is installed
-  apt:
-    name: wget
-    state: present
-    update_cache: yes
-
-- name: Create the keyrings directory
-  file:
-    path: /etc/apt/keyrings
-    state: directory
-    mode: "0755"
-
 - name: Download the GitHub CLI archive keyring
+  become: yes
   get_url:
     url: https://cli.github.com/packages/githubcli-archive-keyring.gpg
     dest: /etc/apt/keyrings/githubcli-archive-keyring.gpg
     mode: "0644"
 
 - name: Add the GitHub CLI repository to sources list
+  become: yes
   apt_repository:
     repo: "deb [arch={{ ansible_architecture }} signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main"
     state: present
     filename: github-cli
 
 - name: Update the APT package index
+  become: yes
   apt:
     update_cache: yes
 
 - name: Install GitHub CLI
+  become: yes
   apt:
     name: gh
     state: present
