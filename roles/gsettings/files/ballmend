@@ -3,7 +3,7 @@
 Session=gnome-xorg
 # Background=/usr/share/backgrounds/gnome/adwaita-day.jpg
 Icon=/home/ballmend/.face
-AutomaticLogin=true
+#AutomaticLogin=true
 SystemAccount=false
 # Locked=false
 # Disabled=false
