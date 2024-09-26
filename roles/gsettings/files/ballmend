@@ -1,10 +1,10 @@
 [User]
 # Language=en_US.UTF-8
-Session=gnome-xorg
+# Session=gnome-xorg
 # Background=/usr/share/backgrounds/gnome/adwaita-day.jpg
-Icon=/home/ballmend/.face
-#AutomaticLogin=true
-SystemAccount=false
+# Icon=/home/ballmend/.face
+# AutomaticLogin=true
+# SystemAccount=false
 # Locked=false
 # Disabled=false
 # PasswordHint=Enter your favorite color
