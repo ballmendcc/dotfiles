@@ -3,7 +3,6 @@
   ansible.builtin.apt:
     name: zsh
     state: present
-    update_cache: true
   become: true
 
 - name: "ZSH | Detect oh-my-zsh"
